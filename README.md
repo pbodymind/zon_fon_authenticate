@@ -14,7 +14,3 @@ Dependencies
 Running
 ============
 `python zon_fon_authenticate.py <LOGIN> <PASSWORD>`
-
-Notes
-============
-You can use this script in a crontab task to always have internet access..
