@@ -20,7 +20,7 @@ from urlparse import urlparse, parse_qs
 from urllib import urlencode
 from os import getenv
 import sys
-
+from datetime import datetime
 randomSleep = 0
 
 while True:
@@ -29,7 +29,7 @@ while True:
 		FON_USERNAME = getenv('FON_USERNAME')
 		FON_PASSWORD = getenv('FON_PASSWORD')
 		
-		print datetime.date.today(), " sleeping time ", randomSleep, "... "
+		print str(datetime.now()), " sleeping time ", randomSleep, "... "
 		if randomSleep > 10:
 			randomSleep = random.randint(4,10)
 		time.sleep(randomSleep)
@@ -52,7 +52,7 @@ while True:
 		auth_url = data.geturl()
 		if not auth_url.startswith('https://zon.portal.fon.com/') and not auth_url.startswith('https://nos.portal.fon.com'):
 			print "Zon fon authentication was not requested. Already authenticated?"
-			randomSleep = random.randint(4,10)
+			randomSleep = random.randint(30,60)
 			continue
 		
 		# Build the POST URL from the redirect location
@@ -71,15 +71,15 @@ while True:
 		# Check the result
 		if 'Incorrect username or password' in html_data:
 			print "Login failed, check username/password!"
-			randomSleep = 10
+			randomSleep = random.randint(30,60)
 			continue
 		elif "'You're connected!":
 			print "You are now connected"
-			randomSleep = random.randint(4,10)
+			randomSleep = random.randint(30,60)
 			continue
 		else:
 			print "Something failed"
-			randomSleep = 0
+			randomSleep = random.randint(10,30)
 			continue
 	except Exception:
 		print "Without internet?"
