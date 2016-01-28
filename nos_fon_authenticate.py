@@ -50,9 +50,10 @@ while True:
 		data = urllib2.urlopen(START_URL,timeout=10)
 		
 		auth_url = data.geturl()
-		if not auth_url.startswith('https://zon.portal.fon.com/') and not auth_url.startswith('https://nos.portal.fon.com'):
+		
+		if not auth_url.startswith('https://nos2.portal.fon.com/') and not auth_url.startswith('https://nos.portal.fon.com') and not auth_url.startswith('https://zon.portal.fon.com/'):
 			print "Zon fon authentication was not requested. Already authenticated?"
-			randomSleep = random.randint(30,60)
+			randomSleep = random.randint(0,30)
 			continue
 		
 		# Build the POST URL from the redirect location
@@ -65,7 +66,7 @@ while True:
 		url = "%s://%s%s?%s" % (urlparse(auth_url).scheme, urlparse(auth_url).netloc, urlparse(auth_url).path, str_data)
 		
 		html = urllib2.urlopen(url,
-		 data=urllib.urlencode({'USERNAME': FON_USERNAME, 'PASSWORD': FON_PASSWORD}),timeout=10)
+		 data=urllib.urlencode({'UserName': FON_USERNAME, 'Password': FON_PASSWORD}),timeout=10)
 		html_data = html.read()
 		
 		# Check the result
